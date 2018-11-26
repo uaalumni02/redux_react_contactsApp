@@ -1,13 +1,20 @@
 import * as types from '../actions/actionTypes';
 import initialState from './initialState';
+import { randomBytes } from 'crypto';
+
 
 
 
 const contactReducer = (state = initialState.contacts, action) => {
     switch(action.type) {
         case types.ADD: {
+        const newContact = {
+            id: randomBytes(4).toString('hex'),
+            ...action.contact,
+        }
         const contacts = state.filter(val => val);
-        contacts.push(action.contact);
+
+        contacts.push(newContact);
         return contacts
 
         }

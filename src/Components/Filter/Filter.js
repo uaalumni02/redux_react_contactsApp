@@ -7,7 +7,7 @@ const Filter = (props) => {
             <input
                 type="text"
                 placeholder="search"
-                onChange={ props.filter }
+                onChange={ props.filterHandler }
             />
         </div>
     );

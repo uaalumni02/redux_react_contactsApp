@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import Add from './Components/Add/Add';
+import Filter from './Components/Filter/Filter';
 import Contacts from './Contacts/Contacts';
 import * as contactActions from './actions/contactActions';
 import './App.css';
@@ -16,6 +17,7 @@ class App extends Component {
     this.handleLastnameChange = this.handleLastnameChange.bind(this);
     this.handlePhoneChange = this.handlePhoneChange.bind(this);
     this.handleDeleteContact = this.handleDeleteContact.bind(this);
+    this.filterHandler = this.filterHandler.bind(this);
 
   }
 
@@ -27,10 +29,17 @@ class App extends Component {
     //   .then(contacts => this.setState({ contacts, allContacts: contacts }))
   }
 
+
+  filterHandler(event) {
+    console.log('before filter ', this.props.contacts);
+    const keyword = event.target.value.toLowerCase().trim();
+    this.props.actions.Filter(keyword);
+    console.log('after filter ', this.props.contacts);
+  }
+  
   submitHandler(event) {
     event.preventDefault();
     const { first_name, last_name, phone } = this.state;
-    console.log(first_name, last_name, phone)
     const newContact = { first_name, last_name, phone, id: 5 };
     this.props.actions.Add(newContact)
     
@@ -67,6 +76,9 @@ class App extends Component {
         handleFirstnameChange={this.handleFirstnameChange}
         handleLastnameChange={this.handleLastnameChange}
         handlePhoneChange={this.handlePhoneChange}
+        />
+        <Filter 
+        filterHandler={this.filterHandler}
         />
         <Contacts
           contacts={this.props.contacts}

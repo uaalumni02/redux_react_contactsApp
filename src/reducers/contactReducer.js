@@ -15,20 +15,21 @@ const contactReducer = (state = initialState.contacts, action) => {
         const contacts = state.filter(val => val);
 
         contacts.push(newContact);
-        return contacts
+        return contacts;
 
         }
 
- case types.FILTER: {
-    const contacts = [...state.contacts].filter(contact => {
-           contacts.first_name.toLowerCase().includes(action.keyword)
-        || contacts.last_name.toLowerCase().includes(action.keyword);
-          });
-          return {
-              ...state, 
-              contacts,
-          }
-    }
+          
+        case types.FILTER: {
+            const contacts = [...state].filter(contact => {
+                const first_name = contact.first_name.toLowerCase();
+                const last_name = contact.last_name.toLowerCase();
+                return first_name.includes(action.keyword) || last_name.includes(action.keyword)
+              });
+            return contacts;
+        }
+          
+    
 
      case types.DELETE: {
         const contacts = [...state];
@@ -44,4 +45,6 @@ return state;
 
 
 export default contactReducer;
+
+
 

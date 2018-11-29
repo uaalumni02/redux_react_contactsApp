@@ -7,10 +7,10 @@ export const Add = (contact) => {
         contact,
     }
 }
-export const Filter = (contact) => {
+export const Filter = (keyword) => {
     return {
         type: types.FILTER,
-        contact,
+        keyword,
     }
 }
 export const Delete = (index) => {
